@@ -1,0 +1,14 @@
+{% extends 'base.j2' %}
+{% block title %}Details{% endblock %}
+{% block content %}
+<h1>{{user.first_name}} {{user.last_name}}<h1>
+
+{% if user.image_url %}
+    <img src="{{ user.image_url }}" alt="{{user.first_name}}_{{user.last_name}}">
+{% endif %}
+
+<form>
+    <button formaction="/users/{{user.id}}/edit" formmethod="GET">Edit</button>
+    <button formaction="/users/{{ user.id }}/delete" formmethod="POST">Delete</button>
+</form>
+{% endblock %}
