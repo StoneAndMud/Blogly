@@ -1,0 +1,13 @@
+{% extends 'base.j2' %}
+{% block title %}Posts{% endblock %}
+{% block content %}
+<h1>Recent Posts</h1>
+        {% for p in posts %}
+        <h2>
+          <a href="/posts/{{p.id}}">{{p.title}}</a>
+        </h2>
+        <p>{{p.content}}</p>
+        <p>Post by: {{p.user.first_name}} {{p.user.last_name}} on {{p.nice_datetime}}</p>
+        {% endfor %}
+<a href="/users/new">Add User</a>
+{% endblock %}
