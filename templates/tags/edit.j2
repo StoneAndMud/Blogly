@@ -1,0 +1,29 @@
+{% extends 'base.j2' %}
+{% block title %}Tags Edit{% endblock %}
+{% block content %}
+    <h2>Edit a Tag</h2>
+    <form method="POST" action="/tags/{{tag.id}}/edit">
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Enter a name for the tag" id="name value="{{tag.name}}" />
+
+        <div class="form-group row form-check">
+            {% for p in posts %}
+            <div>
+            <input type="checkbox"
+                value="{{ p.id }}"
+                id="post_{{ p.id }}"
+                name="posts"
+                {% if p in tag.posts %}
+                    checked
+                {% endif %}>
+            <label class="form-check-label" for="post_{{ p.id }}">
+                {{ p.title }}
+            </label>
+            </div>
+            {% endfor %}
+        </div>
+
+        <a href="/tags">Cancel</a>
+        <button type="submit">Save</button>
+    </form>
+{% endblock %}

@@ -50,3 +50,32 @@ class Post(db.Model):
     def nice_datetime(self):
         """Formatted Date"""
         return self.created_at.strftime("%a %b %-d  %Y, %-I:%M %p")
+
+
+class Tag(db.Model):
+    """Tags"""
+
+    __tablename__ = 'tags'
+
+    def __repr__(self):
+        t = self
+        return f"<Tag id={t.id} Tag name= {t.name}"
+
+    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    name = db.Column(db.Text, nullable=False, unique=True)
+
+    posts = db.relationship('Post', secondary="posts_tags", backref="tags")
+
+
+class PostTag(db.Model):
+    """Mapping of a Post to a Tag."""
+
+    __tablename__ = 'posts_tags'
+
+    def __repr__(self):
+        pt = self
+        return f"Post id={pt.post.id} Tag id={pt.tag.id}"
+
+    post_id = db.Column(db.Integer, db.ForeignKey(
+        'posts.id'), primary_key=True)
+    tag_id = db.Column(db.Integer, db.ForeignKey('tags.id'), primary_key=True)

@@ -56,4 +56,5 @@ class UserViewsTestCase(TestCase):
             html = resp.get_data(as_text=True)
 
             self.assertEqual(resp.status_code, 200)
-            self.assertIn("<a href="/users/1">TestFirstName TestLastName</a>", html)
+            self.assertIn(
+                '<a href="/users/1">TestFirstName TestLastName</a>', html)

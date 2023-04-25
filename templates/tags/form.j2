@@ -1,0 +1,19 @@
+{% extends 'base.j2' %}
+{% block title %}TagForm{% endblock %}
+{% block content %}
+    <h2>Create a tag</h2>
+    <form method="POST">
+        <label for="name">Name</label>
+        <input type="text" name="name" placeholder="Enter a name for the tag" id="name" />
+        <div>
+            {% for p in posts %}
+                <input type="checkbox" value="{{ p.id }}" id="post_{{ p.id }}" name="posts">
+                <label class="form-check-label" for="post_{{ p.id }}">{{ p.title }}</label>
+            {% endfor %}
+        </div>
+        <div>
+            <a href="/tags">Cancel</a>
+            <button type="submit">Add</button>
+        </div>
+    </form>
+{% endblock %}
